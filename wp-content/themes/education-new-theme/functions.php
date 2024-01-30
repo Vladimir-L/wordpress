@@ -1,5 +1,34 @@
 <?php
 
+function pageBanner(array $params = []) {
+
+    if (!isset($params['title'])) {
+        $params['title'] = get_the_title();
+    }
+
+    if (!isset($params['subtitle'])) {
+        $params['subtitle'] = get_field('page_banner_subtitle');
+    }
+
+    if (!isset($params['photo'])) {
+        if (get_field('page_banner_background_image')) {
+            $params['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
+        } else {
+            $params['photo'] = get_theme_file_uri('/images/ocean.jpg');
+        }
+    }
+    ?>
+    <div class="page-banner">
+        <div class="page-banner__bg-image" style="background-image: url(<?= $params['photo'] ?>)"></div>
+        <div class="page-banner__content container container--narrow">
+            <h1 class="page-banner__title"><?= $params['title']; ?></h1>
+            <div class="page-banner__intro">
+                <p><?= $params['subtitle']; ?></p>
+            </div>
+        </div>
+    </div>
+<?php }
+
 function education_files() {
     wp_enqueue_script('main-education-js', get_theme_file_uri('/build/index.js'), array('jquery'), '1.0', true);
     wp_enqueue_style('custom-google-fonts', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
