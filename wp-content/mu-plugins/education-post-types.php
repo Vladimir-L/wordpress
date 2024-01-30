@@ -40,6 +40,24 @@ function education_post_types() {
             ]
         ]
     );
+
+    //Professor Post Type
+    register_post_type(
+        'professor',
+        [
+            'public' => true,
+            'show_in_rest' => true,
+            'menu_icon' => 'dashicons-welcome-learn-more',
+            'supports' => ['title', 'editor', 'excerpt', 'thumbnail'],
+            'labels' => [
+                'name' => 'Professors',
+                'add_new_item' => 'New Professor',
+                'add_new' => 'Add New Professor',
+                'edit_item' => 'Edit Professor',
+                'all_items' => 'All Professor'
+            ]
+        ]
+    );
 }
 
 add_action('init', 'education_post_types');
